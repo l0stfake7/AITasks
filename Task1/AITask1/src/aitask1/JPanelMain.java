@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class JPanelMain extends javax.swing.JPanel {
 
     
-    private DefaultListModel<String> listModel;
+    private final DefaultListModel<String> listModel;
     
     /**
      * Creates new form JPanelMain
@@ -35,11 +35,15 @@ public class JPanelMain extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupGenerateMethod = new javax.swing.ButtonGroup();
         jButtonGenerate = new javax.swing.JButton();
         jLabelNumbers = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListGenerate = new javax.swing.JList<>();
-        jTextFieldNumbers = new javax.swing.JTextField();
+        jComboBoxNumbers = new javax.swing.JComboBox<>();
+        jRadioButtonMethodRecursion = new javax.swing.JRadioButton();
+        jRadioButtonMethodLexicographically = new javax.swing.JRadioButton();
+        jLabelGenerateMethod = new javax.swing.JLabel();
 
         jButtonGenerate.setText("Generate!");
         jButtonGenerate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -48,10 +52,21 @@ public class JPanelMain extends javax.swing.JPanel {
             }
         });
 
-        jLabelNumbers.setText("Type numbers:");
+        jLabelNumbers.setText("Type n:");
 
         jListGenerate.setModel(listModel);
         jScrollPane1.setViewportView(jListGenerate);
+
+        jComboBoxNumbers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+
+        buttonGroupGenerateMethod.add(jRadioButtonMethodRecursion);
+        jRadioButtonMethodRecursion.setSelected(true);
+        jRadioButtonMethodRecursion.setText("recursion");
+
+        buttonGroupGenerateMethod.add(jRadioButtonMethodLexicographically);
+        jRadioButtonMethodLexicographically.setText("lexicographically");
+
+        jLabelGenerateMethod.setText("Generate method:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -62,11 +77,19 @@ public class JPanelMain extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelNumbers)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelGenerateMethod)
+                            .addComponent(jLabelNumbers))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jRadioButtonMethodRecursion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonMethodLexicographically)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonGenerate))
+                            .addComponent(jComboBoxNumbers, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 9, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -75,10 +98,20 @@ public class JPanelMain extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNumbers)
-                    .addComponent(jTextFieldNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonGenerate))
+                    .addComponent(jComboBoxNumbers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelGenerateMethod)
+                            .addComponent(jRadioButtonMethodRecursion))
+                        .addGap(7, 7, 7)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jRadioButtonMethodLexicographically)
+                            .addComponent(jButtonGenerate))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -87,13 +120,29 @@ public class JPanelMain extends javax.swing.JPanel {
         
         ArrayList<String> result;
         
+        //clear listBox
         listModel.removeAllElements();
         
         try {
-            result = AITask1.GeneratePermutation(jTextFieldNumbers.getText());
-            for(String permutation: result) {
-                listModel.addElement(permutation);
+            
+            if(jRadioButtonMethodRecursion.isSelected()) {//recursive
+               //build n size string from 0 to n
+                String source = "";
+                int i = 0;
+                while(i <= Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString())) {
+                    source += i;
+                    i++;
+                }      
+                //calculate
+                result = AITask1.GeneratePermutation(source);
+                //show results
+                for(String permutation: result) {
+                    listModel.addElement(permutation);
+                } 
             }
+            else {//lexicographically
+                
+            }            
         }
         catch(Exception exc) {
             JOptionPane.showMessageDialog(null, exc.getMessage());
@@ -105,10 +154,14 @@ public class JPanelMain extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroupGenerateMethod;
     private javax.swing.JButton jButtonGenerate;
+    private javax.swing.JComboBox<String> jComboBoxNumbers;
+    private javax.swing.JLabel jLabelGenerateMethod;
     private javax.swing.JLabel jLabelNumbers;
     private javax.swing.JList<String> jListGenerate;
+    private javax.swing.JRadioButton jRadioButtonMethodLexicographically;
+    private javax.swing.JRadioButton jRadioButtonMethodRecursion;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFieldNumbers;
     // End of variables declaration//GEN-END:variables
 }
