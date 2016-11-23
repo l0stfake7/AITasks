@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aitask1;
+package aitask1.Forms;
 
+import aitask1.Classes.AITask1;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -123,8 +124,7 @@ public class JPanelMain extends javax.swing.JPanel {
         //clear listBox
         listModel.removeAllElements();
         
-        try {
-            
+        try {            
             if(jRadioButtonMethodRecursion.isSelected()) {//recursive
                //build n size string from 0 to n
                 String source = "";
@@ -134,22 +134,27 @@ public class JPanelMain extends javax.swing.JPanel {
                     i++;
                 }      
                 //calculate
-                result = AITask1.GeneratePermutation(source);
+                result = AITask1.GeneratePermutationRecursive(source);
                 //show results
                 for(String permutation: result) {
                     listModel.addElement(permutation);
                 } 
             }
             else {//lexicographically
-                
+                //calculate
+                //result = AITask1.GeneratePermutationLexicographically(Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()));
+                //show results
+                //for(String permutation: result) {
+                //    listModel.addElement(permutation);
+                //} 
             }            
+        }
+        catch(NumberFormatException exc) {
+            JOptionPane.showMessageDialog(null, exc.getMessage());
         }
         catch(Exception exc) {
             JOptionPane.showMessageDialog(null, exc.getMessage());
-        }
-        
-            
-        
+        } 
     }//GEN-LAST:event_jButtonGenerateMouseClicked
 
 
