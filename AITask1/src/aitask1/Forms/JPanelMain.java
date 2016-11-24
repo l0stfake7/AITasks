@@ -5,14 +5,16 @@
  */
 package aitask1.Forms;
 
-import aitask1.Classes.HetmansProblemSolver;
-import aitask1.Classes.PermutationGenerator;
+import aitask1.Classes.*;
+import java.awt.Dialog;
+import java.awt.Graphics;
+import java.awt.Window;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -23,9 +25,9 @@ public class JPanelMain extends javax.swing.JPanel {
     
     private final DefaultListModel<String> listModeljListGeneratePermutations;
     private final DefaultListModel<String> listModeljListGeneratePermutationsHetman;    
-    private final ListSelectionListener listSelectionListener;
     private ArrayList<String> firstResult;
-    private ArrayList<String> secondResult;
+    private ArrayList<String> secondResult; 
+    private JPanelDrawChessboard jPanelDrawChessboard;
     
     /**
      * Creates new form JPanelMain
@@ -36,22 +38,8 @@ public class JPanelMain extends javax.swing.JPanel {
         listModeljListGeneratePermutationsHetman = new DefaultListModel<>();
         
         initComponents(); 
-        
-        this.listSelectionListener = new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                
-                boolean adjust = listSelectionEvent.getValueIsAdjusting();
-                
-                if (!adjust) {
-                    JList list = (JList) listSelectionEvent.getSource();
-                    int selection = list.getSelectedIndex();
-                    JOptionPane.showMessageDialog(null, secondResult.get(selection));
-                }
-            }
-        };
-        jListGeneratePermutationsHetman.addListSelectionListener(listSelectionListener);
     }   
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,6 +90,11 @@ public class JPanelMain extends javax.swing.JPanel {
 
         jListGeneratePermutationsHetman.setModel(listModeljListGeneratePermutationsHetman);
         jListGeneratePermutationsHetman.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jListGeneratePermutationsHetman.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListGeneratePermutationsHetmanValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(jListGeneratePermutationsHetman);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -110,7 +103,7 @@ public class JPanelMain extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelGenerateMethod)
@@ -125,12 +118,13 @@ public class JPanelMain extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jCheckBoxValidResults, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButtonGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,6 +227,30 @@ public class JPanelMain extends javax.swing.JPanel {
         } 
     }//GEN-LAST:event_jButtonGenerateMouseClicked
 
+    private void jListGeneratePermutationsHetmanValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListGeneratePermutationsHetmanValueChanged
+        //JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+        
+        jPanelDrawChessboard = new JPanelDrawChessboard(secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()));
+            JDialog dialog = null;
+            //show 
+            if (dialog == null) {
+                Window win = SwingUtilities.getWindowAncestor(this);
+                if (win != null) {
+                    dialog = new JDialog(win, secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()),
+                            Dialog.ModalityType.APPLICATION_MODAL);
+                    dialog.getContentPane().add(jPanelDrawChessboard);
+                    dialog.setResizable(false);
+                    dialog.pack();
+                    dialog.setLocationRelativeTo(null);
+                }
+            }
+            dialog.setVisible(true); // here the modal dialog takes over
+    }//GEN-LAST:event_jListGeneratePermutationsHetmanValueChanged
+/*
+            drawPanel = new DrawPanel();
+        drawPanel.setSize(600, 600);
+        drawPanel.setVisible(true);
+    */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupGenerateMethod;
