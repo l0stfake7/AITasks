@@ -5,7 +5,8 @@
  */
 package aitask1.Forms;
 
-import aitask1.Classes.AITask1;
+import aitask1.Classes.HetmansProblemSolver;
+import aitask1.Classes.PermutationGenerator;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -18,12 +19,14 @@ public class JPanelMain extends javax.swing.JPanel {
 
     
     private final DefaultListModel<String> listModel;
+    private final DefaultListModel<String> listModel2;
     
     /**
      * Creates new form JPanelMain
      */
     public JPanelMain() {
         listModel = new DefaultListModel<>();
+        listModel2 = new DefaultListModel<>();
         initComponents();        
     }
 
@@ -45,6 +48,11 @@ public class JPanelMain extends javax.swing.JPanel {
         jRadioButtonMethodRecursion = new javax.swing.JRadioButton();
         jRadioButtonMethodLexicographically = new javax.swing.JRadioButton();
         jLabelGenerateMethod = new javax.swing.JLabel();
+        jCheckBoxValidResults = new javax.swing.JCheckBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        dupa = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jButtonGenerate.setText("Generate!");
         jButtonGenerate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -58,7 +66,7 @@ public class JPanelMain extends javax.swing.JPanel {
         jListGenerate.setModel(listModel);
         jScrollPane1.setViewportView(jListGenerate);
 
-        jComboBoxNumbers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        jComboBoxNumbers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
 
         buttonGroupGenerateMethod.add(jRadioButtonMethodRecursion);
         jRadioButtonMethodRecursion.setSelected(true);
@@ -69,6 +77,15 @@ public class JPanelMain extends javax.swing.JPanel {
 
         jLabelGenerateMethod.setText("Generate method:");
 
+        jCheckBoxValidResults.setText("8 hetmans problem solve");
+
+        dupa.setModel(listModel2);
+        jScrollPane2.setViewportView(dupa);
+
+        jLabel1.setText("jLabel1");
+
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,7 +93,14 @@ public class JPanelMain extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelGenerateMethod)
@@ -86,12 +110,13 @@ public class JPanelMain extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jRadioButtonMethodRecursion)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonMethodLexicographically)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonGenerate))
+                                .addComponent(jRadioButtonMethodLexicographically))
                             .addComponent(jComboBoxNumbers, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 9, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCheckBoxValidResults, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,74 +124,97 @@ public class JPanelMain extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNumbers)
-                    .addComponent(jComboBoxNumbers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxNumbers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxValidResults))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelGenerateMethod)
+                        .addComponent(jRadioButtonMethodRecursion))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jRadioButtonMethodLexicographically)
+                        .addComponent(jButtonGenerate)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelGenerateMethod)
-                            .addComponent(jRadioButtonMethodRecursion))
                         .addGap(7, 7, 7)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButtonMethodLexicographically)
-                            .addComponent(jButtonGenerate))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGenerateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerateMouseClicked
         
-        ArrayList<String> result;
+        ArrayList<String> result = new ArrayList<>();
         
         //clear listBox
         listModel.removeAllElements();
+        listModel2.removeAllElements();
         
         try {            
             if(jRadioButtonMethodRecursion.isSelected()) {//recursive
                //build n size string from 0 to n
                 String source = "";
-                int i = 0;
+                int i = 1;
                 while(i <= Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString())) {
                     source += i;
                     i++;
                 }      
                 //calculate
-                result = AITask1.GeneratePermutationRecursive(source);
-                //show results
-                for(String permutation: result) {
-                    listModel.addElement(permutation);
-                } 
+                result = PermutationGenerator.GeneratePermutationRecursive(source);     
             }
             else {//lexicographically
                 //calculate
-                //result = AITask1.GeneratePermutationLexicographically(Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()));
+                result = PermutationGenerator.GeneratePermutationLexicographically(Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()));              
+            } 
+            //show results
+            int counter2 = 0;
+            for(String permutation: result) {
+                listModel.addElement(permutation);
+                counter2++;
+            }    
+            jLabel2.setText(String.valueOf(counter2));
+            if(jCheckBoxValidResults.isSelected()) {//8 hetmans problem solve
+                ArrayList<String> result2 = HetmansProblemSolver.validPermutations(result);
                 //show results
-                //for(String permutation: result) {
-                //    listModel.addElement(permutation);
-                //} 
-            }            
+                int counter = 0;
+                for(String permutation: result2) {
+                    counter ++;
+                    listModel2.addElement(permutation);
+                } 
+                jLabel1.setText(String.valueOf(counter));
+            }
         }
         catch(NumberFormatException exc) {
-            JOptionPane.showMessageDialog(null, exc.getMessage());
+            JOptionPane.showMessageDialog(null, "whaaaat?" + exc.toString());
         }
         catch(Exception exc) {
-            JOptionPane.showMessageDialog(null, exc.getMessage());
+            JOptionPane.showMessageDialog(null, "whaaaaaaaat?" + exc.toString());
         } 
     }//GEN-LAST:event_jButtonGenerateMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupGenerateMethod;
+    private javax.swing.JList<String> dupa;
     private javax.swing.JButton jButtonGenerate;
+    private javax.swing.JCheckBox jCheckBoxValidResults;
     private javax.swing.JComboBox<String> jComboBoxNumbers;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelGenerateMethod;
     private javax.swing.JLabel jLabelNumbers;
     private javax.swing.JList<String> jListGenerate;
     private javax.swing.JRadioButton jRadioButtonMethodLexicographically;
     private javax.swing.JRadioButton jRadioButtonMethodRecursion;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

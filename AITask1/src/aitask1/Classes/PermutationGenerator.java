@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Bartek
  */
-public class AITask1 {
+public class PermutationGenerator {
     
     public static int factorial(int n) {
         int result = 1;
@@ -39,7 +39,7 @@ public class AITask1 {
         return result;
     }   
 
-    static ArrayList<String> GeneratePermutationLexicographically(int n) {
+    public static ArrayList<String> GeneratePermutationLexicographically(int n) {
         ArrayList<String> result = new ArrayList<>();
 
         /*
