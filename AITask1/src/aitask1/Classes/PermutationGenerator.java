@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class PermutationGenerator {
     
-    public static int factorial(int n) {
+    public static final int factorial(int n) {
         int result = 1;
         for (int i = 1; i <= n; i++) {
             result *= i;
@@ -21,7 +21,7 @@ public class PermutationGenerator {
         return result;
     }
 
-    public static ArrayList<String> GeneratePermutationRecursive(String Permutation) {
+    public static final ArrayList<String> GeneratePermutationRecursive(String Permutation) {
         ArrayList<String> result = new ArrayList<>();
         ArrayList<String> aux = new ArrayList<>();
         
@@ -39,7 +39,7 @@ public class PermutationGenerator {
         return result;
     }   
 
-    public static ArrayList<String> GeneratePermutationLexicographically(int n) {
+    public static final ArrayList<String> GeneratePermutationLexicographically(int n) {
         ArrayList<String> result = new ArrayList<>();
 
         /*
