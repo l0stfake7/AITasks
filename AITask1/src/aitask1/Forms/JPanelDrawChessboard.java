@@ -15,12 +15,15 @@ import java.awt.Graphics;
 public class JPanelDrawChessboard extends javax.swing.JPanel {
 
     private final String permutation;
+    private final byte number;
     /**
      * Creates new form JPanelDrawChessboard
      * @param permutation
+     * @param number
      */
-    public JPanelDrawChessboard(String permutation) {
+    public JPanelDrawChessboard(String permutation, byte number) {
         this.permutation = permutation;
+        this.number = number;
         initComponents();
     }
     
@@ -30,8 +33,8 @@ public class JPanelDrawChessboard extends javax.swing.JPanel {
 
         int size = 50;
         
-        for(int i = 0; i < 8; i++) {
-            for(int j = 0; j < 8; j++) {
+        for(int i = 0; i < number; i++) {
+            for(int j = 0; j < number; j++) {
                 if((i + j) % 2 == 0) {
                     g.setColor(Color.black);
                     g.fillRect(i * size, j * size, size, size);
@@ -43,11 +46,11 @@ public class JPanelDrawChessboard extends javax.swing.JPanel {
                 }
             } 
         }
-        g.setColor(Color.red);
-        for(int i = 0; i < 8; i++) {
-            for(int j = 0; j < 8; j++) {                
+        g.setColor(Color.green);
+        for(int i = 0; i < number; i++) {
+            for(int j = 0; j < number; j++) {                
                 if(Character.getNumericValue(this.permutation.charAt(j) - 1) == i)
-                    g.fillRoundRect(i * size, j * size, size, size, 50, 50);
+                    g.fillRoundRect(i * size, j * size, size, size, 100, 100);
             }
         }
     }

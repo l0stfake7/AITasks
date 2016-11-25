@@ -7,11 +7,9 @@ package aitask1.Forms;
 
 import aitask1.Classes.*;
 import java.awt.Dialog;
-import java.awt.Graphics;
 import java.awt.Window;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -28,6 +26,7 @@ public class JPanelMain extends javax.swing.JPanel {
     private ArrayList<String> firstResult;
     private ArrayList<String> secondResult; 
     private JPanelDrawChessboard jPanelDrawChessboard;
+    private boolean refreshFlag;
     
     /**
      * Creates new form JPanelMain
@@ -36,7 +35,9 @@ public class JPanelMain extends javax.swing.JPanel {
         
         listModeljListGeneratePermutations = new DefaultListModel<>();
         listModeljListGeneratePermutationsHetman = new DefaultListModel<>();
-        
+        firstResult = new ArrayList<>();
+        secondResult = new ArrayList<>();
+        refreshFlag = false;
         initComponents(); 
     }   
 
@@ -156,8 +157,7 @@ public class JPanelMain extends javax.swing.JPanel {
     private void jButtonGenerateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerateMouseClicked
         
         try {  
-            firstResult = new ArrayList<>();
-            secondResult = new ArrayList<>();
+            refreshFlag = true;
             StringBuilder stringBuilder;
             long counter = 0;
             //clear listBox
@@ -218,6 +218,7 @@ public class JPanelMain extends javax.swing.JPanel {
                 
                 }   
             }
+            refreshFlag = false;
         }
         catch(NumberFormatException exc) {
             JOptionPane.showMessageDialog(null, "whaaaat?" + exc.toString());
@@ -228,23 +229,25 @@ public class JPanelMain extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonGenerateMouseClicked
 
     private void jListGeneratePermutationsHetmanValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListGeneratePermutationsHetmanValueChanged
-        //JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
         
-        jPanelDrawChessboard = new JPanelDrawChessboard(secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()));
+        if(!refreshFlag) {
+            jPanelDrawChessboard = new JPanelDrawChessboard(secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Byte.parseByte(jComboBoxNumbers.getSelectedItem().toString()));
             JDialog dialog = null;
             //show 
             if (dialog == null) {
                 Window win = SwingUtilities.getWindowAncestor(this);
                 if (win != null) {
-                    dialog = new JDialog(win, secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()),
-                            Dialog.ModalityType.APPLICATION_MODAL);
+                    dialog = new JDialog(win, secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Dialog.ModalityType.APPLICATION_MODAL);
                     dialog.getContentPane().add(jPanelDrawChessboard);
                     dialog.setResizable(false);
                     dialog.pack();
                     dialog.setLocationRelativeTo(null);
                 }
             }
+
             dialog.setVisible(true); // here the modal dialog takes over
+            dialog = null;
+        }
     }//GEN-LAST:event_jListGeneratePermutationsHetmanValueChanged
 /*
             drawPanel = new DrawPanel();

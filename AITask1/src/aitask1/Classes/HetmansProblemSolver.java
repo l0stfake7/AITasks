@@ -5,7 +5,6 @@
  */
 package aitask1.Classes;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 /**
