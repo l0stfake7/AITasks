@@ -6,6 +6,7 @@
 package aitask1.Classes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -39,73 +40,46 @@ public class PermutationGenerator {
         return result;
     }   
 
-    public static String nextPermutation(String array) {
-        int i = array.length() - 1;
-        while(i > 0 && Character.getNumericValue(array.charAt(i - 1)) >= Character.getNumericValue(array.charAt(i))) {
+    public static boolean nextPermutation(int[] array) {
+	// Find non-increasing suffix
+	int i = array.length - 1;
+	while (i > 0 && array[i - 1] >= array[i])
             i--;
-        }
-        
-        if(i <= 0) {
-            return null;
-        }
-        
-        int j = array.length() - 1;
-        
-        while(Character.getNumericValue(array.charAt(j)) <= Character.getNumericValue(array.charAt(i - 1))) {
+	if (i <= 0)
+            return false;
+		
+	// Find successor to pivot
+	int j = array.length - 1;
+	while (array[j] <= array[i - 1])
             j--;
-        }
         
-        char temp = array.charAt(i - 1);
-        array.replace(array.charAt(i - 1), array.charAt(j));       
-        array.replace(array.charAt(j), temp);
-        
-        j = array.length() - 1;
-        
+	int temp = array[i - 1];
+	array[i - 1] = array[j];
+	array[j] = temp;
+		
+	// Reverse suffix
+	j = array.length - 1;
+	
         while (i < j) {
-            temp = array.charAt(i);
-            array.replace(array.charAt(i), array.charAt(j));
-            array.replace(array.charAt(j), temp);
+            temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
             i++;
             j--;
-        }
-        return null;
+	}
+	return true;
     }
+	
     
     public static final ArrayList<String> GeneratePermutationLexicographically(int n) {
+        
         ArrayList<String> result = new ArrayList<>();
-
-        /*
-        * example, for n = 3:
-         123       
-         132
-         213
-         231
-         312
-         321
-        */
-        //generate begin permutation, for n=5: 012345
-        String beginPermutation = "";
-        for(int i = 1; i <= n; i++) {
-            beginPermutation += i;            
-        }
+        int[] array = {0, 1, 2};
         
-        String lastPermutation = beginPermutation;
-        String nextPermutation;
-        for( ; ;) {        
-            
-            if(nextPermutation(lastPermutation) == null) {
-                break;
-            }                
-            else {
-                nextPermutation = nextPermutation(lastPermutation);
-                result.add(lastPermutation);
-                lastPermutation = nextPermutation;
-            }
-            
-            //result.add(lastPermutation);
-        }
+        do {  // Must start at lowest permutation
+            result.add(Arrays.toString(array));
+        } while (nextPermutation(array));      
         
-        return result;        
-    }
-    
+        return result;
+    }    
 }
