@@ -37,7 +37,7 @@ public class JPanelMain extends javax.swing.JPanel {
         listModeljListGeneratePermutationsHetman = new DefaultListModel<>();
         firstResult = new ArrayList<>();
         secondResult = new ArrayList<>();
-        refreshFlag = false;
+        refreshFlag = true;
         initComponents(); 
     }   
 
@@ -92,11 +92,6 @@ public class JPanelMain extends javax.swing.JPanel {
 
         jListGeneratePermutationsHetman.setModel(listModeljListGeneratePermutationsHetman);
         jListGeneratePermutationsHetman.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        jListGeneratePermutationsHetman.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jListGeneratePermutationsHetmanValueChanged(evt);
-            }
-        });
         jScrollPane2.setViewportView(jListGeneratePermutationsHetman);
 
         buttonGroupHetmansProbleSolveType.add(jRadioButtonStandardSolve);
@@ -186,31 +181,12 @@ public class JPanelMain extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClearMouseClicked
-        
+        listModeljListGeneratePermutations.removeAllElements();
+        listModeljListGeneratePermutationsHetman.removeAllElements();
+        firstResult.clear();
+        secondResult.clear();        
+        refreshFlag = true;
     }//GEN-LAST:event_jButtonClearMouseClicked
-
-    private void jListGeneratePermutationsHetmanValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListGeneratePermutationsHetmanValueChanged
-        
-        if(!refreshFlag) {
-            jPanelDrawChessboard = new JPanelDrawChessboard(secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Byte.parseByte(jComboBoxNumbers.getSelectedItem().toString()));
-            JDialog dialog = null;
-            //show 
-            if (dialog == null) {
-                Window win = SwingUtilities.getWindowAncestor(this);
-                if (win != null) {
-                    dialog = new JDialog(win, secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Dialog.ModalityType.APPLICATION_MODAL);
-                    dialog.getContentPane().add(jPanelDrawChessboard);
-                    dialog.setResizable(false);
-                    dialog.setSize(Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55, Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55);                
-                    dialog.setLocationRelativeTo(null);
-                }
-            }
-
-            dialog.setVisible(true); // here the modal dialog takes over
-            dialog.pack();
-            dialog = null;
-        }
-    }//GEN-LAST:event_jListGeneratePermutationsHetmanValueChanged
 
     private void jButtonGenerateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerateMouseClicked
         try {  
@@ -291,14 +267,26 @@ public class JPanelMain extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonGenerateMouseClicked
 
     private void jButtonShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonShowMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonShowMouseClicked
-/*
-            drawPanel = new DrawPanel();
-        drawPanel.setSize(600, 600);
-        drawPanel.setVisible(true);
-    */
+        if(!refreshFlag) {
+            jPanelDrawChessboard = new JPanelDrawChessboard(secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Byte.parseByte(jComboBoxNumbers.getSelectedItem().toString()));
+            JDialog dialog = null;
+            //show 
+            if (dialog == null) {
+                Window win = SwingUtilities.getWindowAncestor(this);
+                if (win != null) {
+                    dialog = new JDialog(win, secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Dialog.ModalityType.APPLICATION_MODAL);
+                    dialog.getContentPane().add(jPanelDrawChessboard);
+                    dialog.setResizable(false);
+                    dialog.setSize(Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55, Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55);                
+                    dialog.setLocationRelativeTo(null);
+                }
+            }
 
+            dialog.setVisible(true); // here the modal dialog takes over
+            dialog.pack();
+            dialog = null;
+        }
+    }//GEN-LAST:event_jButtonShowMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupGenerateMethod;
     private javax.swing.ButtonGroup buttonGroupHetmansProbleSolveType;
