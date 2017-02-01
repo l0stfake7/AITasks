@@ -20,7 +20,7 @@ import javax.swing.SwingUtilities;
  */
 public class JPanelMain extends javax.swing.JPanel {
 
-    
+    //TODO: save steps to queque/stack
     private final DefaultListModel<String> listModeljListGeneratePermutations;
     private final DefaultListModel<String> listModeljListGeneratePermutationsHetman;    
     private ArrayList<String> firstResult;
@@ -59,13 +59,11 @@ public class JPanelMain extends javax.swing.JPanel {
         jListGeneratePermutations = new javax.swing.JList<>();
         jComboBoxNumbers = new javax.swing.JComboBox<>();
         jRadioButtonMethodRecursion = new javax.swing.JRadioButton();
-        jRadioButtonMethodLexicographically = new javax.swing.JRadioButton();
         jLabelGenerateMethod = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListGeneratePermutationsHetman = new javax.swing.JList<>();
         jRadioButtonStandardSolve = new javax.swing.JRadioButton();
         jRadioButtonBacktracingSolve = new javax.swing.JRadioButton();
-        jRadioButtonStepestAscentSolve = new javax.swing.JRadioButton();
         jButtonGenerate = new javax.swing.JButton();
         jButtonShow = new javax.swing.JButton();
 
@@ -84,14 +82,11 @@ public class JPanelMain extends javax.swing.JPanel {
         jListGeneratePermutations.setModel(listModeljListGeneratePermutations);
         jScrollPane1.setViewportView(jListGeneratePermutations);
 
-        jComboBoxNumbers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
+        jComboBoxNumbers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
 
         buttonGroupGenerateMethod.add(jRadioButtonMethodRecursion);
         jRadioButtonMethodRecursion.setSelected(true);
         jRadioButtonMethodRecursion.setText("recursion");
-
-        buttonGroupGenerateMethod.add(jRadioButtonMethodLexicographically);
-        jRadioButtonMethodLexicographically.setText("lexicographically");
 
         jLabelGenerateMethod.setText("Generate method:");
 
@@ -111,11 +106,8 @@ public class JPanelMain extends javax.swing.JPanel {
         jRadioButtonStandardSolve.setMargin(new java.awt.Insets(1, 1, 1, 1));
 
         buttonGroupHetmansProbleSolveType.add(jRadioButtonBacktracingSolve);
-        jRadioButtonBacktracingSolve.setText("8 hetmans problem recurrence solve");
+        jRadioButtonBacktracingSolve.setText("8 hetmans problem backtrace solve");
         jRadioButtonBacktracingSolve.setMargin(new java.awt.Insets(1, 1, 1, 1));
-
-        buttonGroupHetmansProbleSolveType.add(jRadioButtonStepestAscentSolve);
-        jRadioButtonStepestAscentSolve.setText("8 hetmans problem steepest-ascent solve");
 
         jButtonGenerate.setText("Generate");
         jButtonGenerate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -153,15 +145,11 @@ public class JPanelMain extends javax.swing.JPanel {
                             .addComponent(jLabelGenerateMethod)
                             .addComponent(jLabelNumbers))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButtonMethodRecursion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonMethodLexicographically))
-                            .addComponent(jComboBoxNumbers, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButtonMethodRecursion)
+                            .addComponent(jComboBoxNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButtonStepestAscentSolve)
                             .addComponent(jRadioButtonStandardSolve)
                             .addComponent(jRadioButtonBacktracingSolve))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -176,18 +164,14 @@ public class JPanelMain extends javax.swing.JPanel {
                             .addComponent(jLabelNumbers)
                             .addComponent(jComboBoxNumbers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelGenerateMethod)
-                                .addComponent(jRadioButtonMethodRecursion))
-                            .addComponent(jRadioButtonMethodLexicographically)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelGenerateMethod)
+                            .addComponent(jRadioButtonMethodRecursion)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jRadioButtonStandardSolve)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonBacktracingSolve)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonStepestAscentSolve)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(jRadioButtonBacktracingSolve)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -203,6 +187,32 @@ public class JPanelMain extends javax.swing.JPanel {
 
     private void jButtonClearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonClearMouseClicked
         
+    }//GEN-LAST:event_jButtonClearMouseClicked
+
+    private void jListGeneratePermutationsHetmanValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListGeneratePermutationsHetmanValueChanged
+        
+        if(!refreshFlag) {
+            jPanelDrawChessboard = new JPanelDrawChessboard(secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Byte.parseByte(jComboBoxNumbers.getSelectedItem().toString()));
+            JDialog dialog = null;
+            //show 
+            if (dialog == null) {
+                Window win = SwingUtilities.getWindowAncestor(this);
+                if (win != null) {
+                    dialog = new JDialog(win, secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Dialog.ModalityType.APPLICATION_MODAL);
+                    dialog.getContentPane().add(jPanelDrawChessboard);
+                    dialog.setResizable(false);
+                    dialog.setSize(Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55, Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55);                
+                    dialog.setLocationRelativeTo(null);
+                }
+            }
+
+            dialog.setVisible(true); // here the modal dialog takes over
+            dialog.pack();
+            dialog = null;
+        }
+    }//GEN-LAST:event_jListGeneratePermutationsHetmanValueChanged
+
+    private void jButtonGenerateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerateMouseClicked
         try {  
             refreshFlag = true;
             StringBuilder stringBuilder;
@@ -224,8 +234,7 @@ public class JPanelMain extends javax.swing.JPanel {
                 firstResult = PermutationGenerator.GeneratePermutationRecursive(source);     
             }
             else {//lexicographically
-                //calculate
-                firstResult = PermutationGenerator.GeneratePermutationLexicographically(Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()));              
+                //calculate                            
             } 
             
             //show results
@@ -270,9 +279,6 @@ public class JPanelMain extends javax.swing.JPanel {
                 
                 
             }
-            if(jRadioButtonStepestAscentSolve.isSelected()) {//8 hetmans problem solve(steepest-ascent)
-                
-            }
             
             refreshFlag = false;
         }
@@ -282,33 +288,6 @@ public class JPanelMain extends javax.swing.JPanel {
         catch(Exception exc) {
             JOptionPane.showMessageDialog(null, "whaaaaaaaat?" + exc.toString());
         } 
-    }//GEN-LAST:event_jButtonClearMouseClicked
-
-    private void jListGeneratePermutationsHetmanValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListGeneratePermutationsHetmanValueChanged
-        
-        if(!refreshFlag) {
-            jPanelDrawChessboard = new JPanelDrawChessboard(secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Byte.parseByte(jComboBoxNumbers.getSelectedItem().toString()));
-            JDialog dialog = null;
-            //show 
-            if (dialog == null) {
-                Window win = SwingUtilities.getWindowAncestor(this);
-                if (win != null) {
-                    dialog = new JDialog(win, secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Dialog.ModalityType.APPLICATION_MODAL);
-                    dialog.getContentPane().add(jPanelDrawChessboard);
-                    dialog.setResizable(false);
-                    dialog.setSize(Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55, Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55);                
-                    dialog.setLocationRelativeTo(null);
-                }
-            }
-
-            dialog.setVisible(true); // here the modal dialog takes over
-            dialog.pack();
-            dialog = null;
-        }
-    }//GEN-LAST:event_jListGeneratePermutationsHetmanValueChanged
-
-    private void jButtonGenerateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGenerateMouseClicked
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonGenerateMouseClicked
 
     private void jButtonShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonShowMouseClicked
@@ -332,10 +311,8 @@ public class JPanelMain extends javax.swing.JPanel {
     private javax.swing.JList<String> jListGeneratePermutations;
     private javax.swing.JList<String> jListGeneratePermutationsHetman;
     private javax.swing.JRadioButton jRadioButtonBacktracingSolve;
-    private javax.swing.JRadioButton jRadioButtonMethodLexicographically;
     private javax.swing.JRadioButton jRadioButtonMethodRecursion;
     private javax.swing.JRadioButton jRadioButtonStandardSolve;
-    private javax.swing.JRadioButton jRadioButtonStepestAscentSolve;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables

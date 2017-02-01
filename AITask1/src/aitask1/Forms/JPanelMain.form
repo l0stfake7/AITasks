@@ -44,17 +44,12 @@
                           <Component id="jLabelNumbers" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jRadioButtonMethodRecursion" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonMethodLexicographically" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jComboBoxNumbers" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jRadioButtonMethodRecursion" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxNumbers" min="-2" pref="174" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jRadioButtonStepestAscentSolve" min="-2" max="-2" attributes="0"/>
                           <Component id="jRadioButtonStandardSolve" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jRadioButtonBacktracingSolve" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -75,23 +70,18 @@
                           <Component id="jComboBoxNumbers" alignment="3" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelGenerateMethod" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButtonMethodRecursion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jRadioButtonMethodLexicographically" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelGenerateMethod" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonMethodRecursion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jRadioButtonStandardSolve" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jRadioButtonBacktracingSolve" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jRadioButtonStepestAscentSolve" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
@@ -153,7 +143,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxNumbers">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="9">
+          <StringArray count="8">
             <StringItem index="0" value="1"/>
             <StringItem index="1" value="2"/>
             <StringItem index="2" value="3"/>
@@ -162,7 +152,6 @@
             <StringItem index="5" value="6"/>
             <StringItem index="6" value="7"/>
             <StringItem index="7" value="8"/>
-            <StringItem index="8" value="9"/>
           </StringArray>
         </Property>
       </Properties>
@@ -177,14 +166,6 @@
         </Property>
         <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="recursion"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButtonMethodLexicographically">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroupGenerateMethod"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="lexicographically"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelGenerateMethod">
@@ -233,18 +214,10 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroupHetmansProbleSolveType"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="8 hetmans problem recurrence solve"/>
+        <Property name="text" type="java.lang.String" value="8 hetmans problem backtrace solve"/>
         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
           <Insets value="[1, 1, 1, 1]"/>
         </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButtonStepestAscentSolve">
-      <Properties>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="buttonGroupHetmansProbleSolveType"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="8 hetmans problem steepest-ascent solve"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonGenerate">
