@@ -40,8 +40,7 @@ public class HetmansProblemSolver {
         return result;
     }
     
-    public static final String BacktracePermutation(String permutations) {
-        
+    public static final String BacktracePermutation() {
         
         return new String("");
     }

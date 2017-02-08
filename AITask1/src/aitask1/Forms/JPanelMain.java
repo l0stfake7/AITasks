@@ -25,6 +25,7 @@ public class JPanelMain extends javax.swing.JPanel {
     private final DefaultListModel<String> listModeljListGeneratePermutationsHetman;    
     private ArrayList<String> firstResult;
     private ArrayList<String> secondResult; 
+    private String thirdResult; 
     private JPanelDrawChessboard jPanelDrawChessboard;
     private boolean refreshFlag;
     
@@ -37,11 +38,11 @@ public class JPanelMain extends javax.swing.JPanel {
         listModeljListGeneratePermutationsHetman = new DefaultListModel<>();
         firstResult = new ArrayList<>();
         secondResult = new ArrayList<>();
+        thirdResult = new String();        
         refreshFlag = true;
         initComponents(); 
     }   
-
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,7 +83,7 @@ public class JPanelMain extends javax.swing.JPanel {
         jListGeneratePermutations.setModel(listModeljListGeneratePermutations);
         jScrollPane1.setViewportView(jListGeneratePermutations);
 
-        jComboBoxNumbers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
+        jComboBoxNumbers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "4", "5", "6", "7", "8" }));
 
         buttonGroupGenerateMethod.add(jRadioButtonMethodRecursion);
         jRadioButtonMethodRecursion.setSelected(true);
@@ -199,15 +200,16 @@ public class JPanelMain extends javax.swing.JPanel {
             
             
             if(jRadioButtonMethodRecursion.isSelected()) {//recursive
-               //build n size string from 0 to n
+               //build n size string from 0 to n, example: 0123456
                 String source = "";
                 int i = 1;
                 while(i <= Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString())) {
                     source += i;
                     i++;
-                }      
+                }              
+                
                 //calculate
-                firstResult = PermutationGenerator.GeneratePermutationRecursive(source);     
+                firstResult = PermutationGenerator.GeneratePermutationRecursive(source);                  
             }
             else {//lexicographically
                 //calculate                            
@@ -253,7 +255,18 @@ public class JPanelMain extends javax.swing.JPanel {
             
             if(jRadioButtonBacktracingSolve.isSelected()) {//8 hetmans problem solve(backtracking)
                 
-                
+                thirdResult = HetmansProblemSolver.BacktracePermutation();
+                thirdResult = "12345678";
+                //show results
+                stringBuilder = new StringBuilder("");
+                stringBuilder.append("1 = {");
+                for (int i = 0; i < thirdResult.length(); i++){
+                    stringBuilder.append(thirdResult.charAt(i));
+                    if(i < thirdResult.length() -1)
+                        stringBuilder.append(",");
+                }
+                stringBuilder.append("}");
+                listModeljListGeneratePermutationsHetman.addElement(stringBuilder.toString());
             }
             
             refreshFlag = false;
@@ -267,17 +280,23 @@ public class JPanelMain extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonGenerateMouseClicked
 
     private void jButtonShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonShowMouseClicked
-        if(!refreshFlag) {
-            jPanelDrawChessboard = new JPanelDrawChessboard(secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Byte.parseByte(jComboBoxNumbers.getSelectedItem().toString()));
+        if(!refreshFlag && !jListGeneratePermutationsHetman.isSelectionEmpty()) {
+            if(jRadioButtonStandardSolve.isSelected()) {//8 hetmans problem solve(all)
+                jPanelDrawChessboard = new JPanelDrawChessboard(secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()));
+            }
+            else if(jRadioButtonBacktracingSolve.isSelected()) {//8 hetmans problem solve(backtracking)
+                jPanelDrawChessboard = new JPanelDrawChessboard(thirdResult);           
+            }
+            
             JDialog dialog = null;
             //show 
             if (dialog == null) {
                 Window win = SwingUtilities.getWindowAncestor(this);
                 if (win != null) {
-                    dialog = new JDialog(win, secondResult.get(jListGeneratePermutationsHetman.getSelectedIndex()), Dialog.ModalityType.APPLICATION_MODAL);
+                    dialog = new JDialog(win, jPanelDrawChessboard.getPermutation(), Dialog.ModalityType.APPLICATION_MODAL);
                     dialog.getContentPane().add(jPanelDrawChessboard);
                     dialog.setResizable(false);
-                    dialog.setSize(Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55, Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()) * 55);                
+                    dialog.setSize(jPanelDrawChessboard.getPermutation().length() * 55-5, jPanelDrawChessboard.getPermutation().length() * 55+10);                
                     dialog.setLocationRelativeTo(null);
                 }
             }
@@ -285,6 +304,9 @@ public class JPanelMain extends javax.swing.JPanel {
             dialog.setVisible(true); // here the modal dialog takes over
             dialog.pack();
             dialog = null;
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "You must generate results and select permutation to show", "Warning", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonShowMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables

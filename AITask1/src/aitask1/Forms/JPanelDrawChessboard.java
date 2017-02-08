@@ -14,23 +14,29 @@ import java.awt.Graphics;
  */
 public class JPanelDrawChessboard extends javax.swing.JPanel {
 
+    /**
+     * @return the permutation
+     */
+    public String getPermutation() {
+        return permutation;
+    }
+
     private final String permutation;
-    private final byte number;
+    private final int number;
     /**
      * Creates new form JPanelDrawChessboard
      * @param permutation
-     * @param number
      */
-    public JPanelDrawChessboard(String permutation, byte number) {
+    public JPanelDrawChessboard(String permutation) {
         this.permutation = permutation;
-        this.number = number;
+        this.number = permutation.length();
         initComponents();
     }
     
     @Override
     public void paint(Graphics g){
         g.setColor(Color.black);
-
+        
         int size = 50;
         
         for(int i = 0; i < number; i++) {
@@ -49,7 +55,7 @@ public class JPanelDrawChessboard extends javax.swing.JPanel {
         g.setColor(Color.green);
         for(int i = 0; i < number; i++) {
             for(int j = 0; j < number; j++) {                
-                if(Character.getNumericValue(this.permutation.charAt(j) - 1) == i)
+                if(Character.getNumericValue(this.getPermutation().charAt(j) - 1) == i)
                     g.fillRoundRect(i * size, j * size, size, size, 100, 100);
             }
         }
