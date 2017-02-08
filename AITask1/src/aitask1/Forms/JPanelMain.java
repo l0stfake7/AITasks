@@ -253,19 +253,16 @@ public class JPanelMain extends javax.swing.JPanel {
                 }   
             }
             
-            if(jRadioButtonBacktracingSolve.isSelected()) {//8 hetmans problem solve(backtracking)
-                
-                thirdResult = HetmansProblemSolver.BacktracePermutation();
-                thirdResult = "12345678";
-                //show results
+            if(jRadioButtonBacktracingSolve.isSelected()) {//8 hetmans problem solve(backtracking)               
+                thirdResult = HetmansProblemSolver.BacktracePermutation(0, Integer.parseInt(jComboBoxNumbers.getSelectedItem().toString()));
                 stringBuilder = new StringBuilder("");
-                stringBuilder.append("1 = {");
-                for (int i = 0; i < thirdResult.length(); i++){
-                    stringBuilder.append(thirdResult.charAt(i));
-                    if(i < thirdResult.length() -1)
-                        stringBuilder.append(",");
-                }
-                stringBuilder.append("}");
+                    stringBuilder.append("1 = {");
+                    for (int i = 0; i < thirdResult.length(); i++){
+                        stringBuilder.append(thirdResult.charAt(i));
+                        if(i < thirdResult.length() -1)
+                            stringBuilder.append(",");
+                    }
+                    stringBuilder.append("}");
                 listModeljListGeneratePermutationsHetman.addElement(stringBuilder.toString());
             }
             
